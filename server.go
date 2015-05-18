@@ -3,7 +3,6 @@ package dronehook
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 )
 
@@ -45,7 +44,8 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 func (s *Server) processPayload(raw []byte) {
 	p, err := makePayload(raw)
 	if err != nil {
-		log.Printf("Error making payload: %s", err)
+		panic(err)
+		//		log.Printf("Error making payload: %s", err)
 		return
 	}
 	s.Out <- *p
