@@ -38,6 +38,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "500 Internal Error - Could not read from request: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
+	fmt.Println("Sending message...")
 	go s.processPayload(respBody)
 }
 
