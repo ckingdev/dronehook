@@ -54,19 +54,3 @@ func makePayload(raw []byte) (*Payload, error) {
 	}
 	return &p, nil
 }
-
-func (p *Payload) String() string {
-	var emoji string
-	if p.Commit.Status == "Success" {
-		emoji = ":white_check_mark:"
-	} else {
-		emoji = ":x:"
-	}
-	return fmt.Sprintf("%s [ drone.io | %s | %s ] %s | %s",
-		emoji,
-		p.Repository.Name,
-		p.Commit.Branch,
-		p.Commit.Message,
-		p.Commit.Status,
-	)
-}
