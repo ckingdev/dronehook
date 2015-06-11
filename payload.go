@@ -2,7 +2,6 @@ package dronehook
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 type RepositoryType struct {
