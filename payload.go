@@ -4,47 +4,47 @@ import (
 	"encoding/json"
 )
 
-type RepositoryType struct {
-	Remote       string `json:"remote"`
-	Host         string `json:"host"`
-	Owner        string `json:"owner"`
-	Name         string `json:"name"`
-	URL          string `json:"url"`
-	CloneURL     string `json:"clone_url"`
-	GitURL       string `json:"git_url"`
-	SSHURL       string `json:"ssh_url"`
-	Active       bool   `json:"active"`
-	Private      bool   `json:"private"`
-	Privileged   bool   `json:"privileged"`
-	PostCommits  bool   `json:"post_commits"`
-	PullRequests bool   `json:"pull_requests"`
-	Timeout      int    `json:"timeout"`
-	CreatedAt    int    `json:"created_at"`
-	UpdatedAt    int    `json:"updated_at"`
-}
+// type RepositoryType struct {
+// 	Remote       string `json:"remote"`
+// 	Host         string `json:"host"`
+// 	Owner        string `json:"owner"`
+// 	Name         string `json:"name"`
+// 	URL          string `json:"url"`
+// 	CloneURL     string `json:"clone_url"`
+// 	GitURL       string `json:"git_url"`
+// 	SSHURL       string `json:"ssh_url"`
+// 	Active       bool   `json:"active"`
+// 	Private      bool   `json:"private"`
+// 	Privileged   bool   `json:"privileged"`
+// 	PostCommits  bool   `json:"post_commits"`
+// 	PullRequests bool   `json:"pull_requests"`
+// 	Timeout      int    `json:"timeout"`
+// 	CreatedAt    int    `json:"created_at"`
+// 	UpdatedAt    int    `json:"updated_at"`
+// }
 
-type CommitType struct {
-	ID          int    `json:"id"`
-	Status      string `json:"status"`
-	StartedAt   int    `json:"started_at"`
-	FinishedAt  int    `json:"finished_at"`
-	Duration    int    `json:"duration"`
-	SHA         string `json:"sha"`
-	Branch      string `json:"branch"`
-	PullRequest string `json:"pull_request"`
-	Author      string `json:"author"`
-	Gravatar    string `json:"gravatar"`
-	Timestamp   string `json:"timestamp"`
-	Message     string `json:"message"`
-	CreatedAt   int    `json:"created_at"`
-	UpdatedAt   int    `json:"updated_at"`
-}
+// type CommitType struct {
+// 	ID          int    `json:"id"`
+// 	Status      string `json:"status"`
+// 	StartedAt   int    `json:"started_at"`
+// 	FinishedAt  int    `json:"finished_at"`
+// 	Duration    int    `json:"duration"`
+// 	SHA         string `json:"sha"`
+// 	Branch      string `json:"branch"`
+// 	PullRequest string `json:"pull_request"`
+// 	Author      string `json:"author"`
+// 	Gravatar    string `json:"gravatar"`
+// 	Timestamp   string `json:"timestamp"`
+// 	Message     string `json:"message"`
+// 	CreatedAt   int    `json:"created_at"`
+// 	UpdatedAt   int    `json:"updated_at"`
+// }
 
-type Payload struct {
-	FromURL    string         `json:"from_url"`
-	Commit     CommitType     `json:"commit"`
-	Repository RepositoryType `json:"repository"`
-}
+// type Payload struct {
+// 	FromURL    string         `json:"from_url"`
+// 	Commit     CommitType     `json:"commit"`
+// 	Repository RepositoryType `json:"repository"`
+// }
 
 func makePayload(raw []byte) (*Payload, error) {
 	var p Payload
@@ -52,4 +52,44 @@ func makePayload(raw []byte) (*Payload, error) {
 		return nil, err
 	}
 	return &p, nil
+}
+
+type Payload struct {
+	Build struct {
+		Author       string `json:"author"`
+		AuthorAvatar string `json:"author_avatar"`
+		AuthorEmail  string `json:"author_email"`
+		Branch       string `json:"branch"`
+		Commit       string `json:"commit"`
+		CreatedAt    int    `json:"created_at"`
+		EnqueuedAt   int    `json:"enqueued_at"`
+		Event        string `json:"event"`
+		FinishedAt   int    `json:"finished_at"`
+		LinkURL      string `json:"link_url"`
+		Message      string `json:"message"`
+		Number       int    `json:"number"`
+		Ref          string `json:"ref"`
+		Refspec      string `json:"refspec"`
+		Remote       string `json:"remote"`
+		StartedAt    int    `json:"started_at"`
+		Status       string `json:"status"`
+		Timestamp    int    `json:"timestamp"`
+		Title        string `json:"title"`
+	} `json:"build"`
+	Repo struct {
+		AllowDeploys  bool   `json:"allow_deploys"`
+		AllowPr       bool   `json:"allow_pr"`
+		AllowPush     bool   `json:"allow_push"`
+		AllowTags     bool   `json:"allow_tags"`
+		AvatarURL     string `json:"avatar_url"`
+		CloneURL      string `json:"clone_url"`
+		DefaultBranch string `json:"default_branch"`
+		FullName      string `json:"full_name"`
+		LinkURL       string `json:"link_url"`
+		Name          string `json:"name"`
+		Owner         string `json:"owner"`
+		Private       bool   `json:"private"`
+		Timeout       int    `json:"timeout"`
+		Trusted       bool   `json:"trusted"`
+	} `json:"repo"`
 }
